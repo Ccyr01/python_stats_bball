@@ -55,7 +55,7 @@ press the number that is shown to the left of it.
         print("{}: {}".format(teams.index(team),team))
     print("{}: Quit".format(len(teams)))
     try:
-        teamSelection = int(input("Select number choice here: \n"))
+        teamSelection = int(input("Select number choice here: \t"))
     except:
         print("Invalid Input.")
     else:
@@ -69,19 +69,27 @@ press the number that is shown to the left of it.
             team_name = teams[teamSelection]
             show_team_details(team_name, team_players)
 def show_team_details(team_name, players):
-    print(f'Team: {team_name} stats')
+    print(f'Team: {team_name} Stats\n-------------------------------')
     print(f'Total Players: {len(players)}')
     num_experienced = 0
     num_inexperienced = 0
+    guardian_list = []
+    players_on_team = []
     for player in players:
+        players_on_team.append(player["name"])
+        guardians = player["guardians"].split(" and ")
+        guardian_list.extend(guardians)
         if player["experience"] == True:
             num_experienced += 1
         else:
             num_inexperienced += 1
     avg_height = round(mean(player["height"] for player in players))
+   
     print(f'Total experienced: {num_experienced}')
     print(f'Total inexperienced: {num_inexperienced}')
     print(f'Average Height: {avg_height}')
+    print(f"Players:\n\t{', '.join(players_on_team)}")
+    print(f"Guardians:\n\t{', '.join(guardian_list)}")
 
 
 
